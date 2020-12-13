@@ -1,0 +1,109 @@
+<div *ngIf="isVertical && !isNamed" (click)="onClicked()">
+  <div
+    *ngFor="let color of colorArray | discretized"
+    [style.background]="color"
+  >
+    &nbsp;
+  </div>
+</div>
+<div *ngIf="!isVertical && !isNamed" (click)="onClicked()">
+  <div *ngIf="isGradient">
+    <mat-grid-list [ngStyle]="getGradient()" rows="1" cols="5" rowHeight="2:1">
+      <mat-grid-tile [colspan]="5" [rowspan]="1"></mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <div *ngIf="!isGradient">
+    <div *ngIf="colorArray.length > colorCount" (click)="onClicked()">
+      <mat-grid-list
+        gutterSize="0"
+        rows="1"
+        [cols]="colorArray.length"
+        [rowHeight]="rowHeight"
+        [ngStyle]="getGradient()"
+      >
+        <mat-grid-tile
+          *ngFor="let color of colorArray"
+          [colspan]="1"
+          [rowspan]="1"
+          [style.background]="color"
+        >
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div *ngIf="colorCount > colorArray.length" (click)="onClicked()">
+      <mat-grid-list
+        gutterSize="0"
+        rows="1"
+        [cols]="colorArray.length"
+        [rowHeight]="rowHeight"
+        [ngStyle]="getGradient()"
+      >
+        <mat-grid-tile
+          *ngFor="let color of colorArray"
+          [colspan]="1"
+          [rowspan]="1"
+          [style.background]="color"
+        >
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div *ngIf="colorArray.length == colorCount" (click)="onClicked()">
+      <mat-grid-list
+        gutterSize="0"
+        rows="1"
+        [cols]="colorCount"
+        [rowHeight]="rowHeight"
+        [ngStyle]="getGradient()"
+      >
+        <mat-grid-tile
+          *ngFor="let color of colorArray"
+          [colspan]="1"
+          [rowspan]="1"
+          [style.background]="color"
+        >
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="!isNotClickable && isNamed"
+  (click)="onClicked()"
+  style="background-color: transparent"
+>
+  <div class="butt-palette-row container-fluid" [style.height]="rowHeight">
+    <div class="row" [style.height]="rowHeight">
+      <div class="col center-vertical-horizontal">
+        <span style="font-size: x-small">{{ name }}</span>
+      </div>
+
+      <div
+        class="col"
+        *ngFor="let color of colorArray; index as i; trackBy: trackByIndex"
+        [style.background]="color"
+        style="padding: 0px; margin: 0px"
+      ></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isNotClickable && isNamed" (click)="onClicked()">
+  <div class=".butt-palette-row-no-click container-fluid" style="cursor: text">
+    <div class="row" [style.height]="rowHeight">
+      <div class="col center-vertical-horizontal">
+        <span style="font-size: x-small">{{ name }}</span>
+      </div>
+      <div
+        class="col"
+        *ngFor="let color of colorArray; index as i; trackBy: trackByIndex"
+        [style.background]="color"
+        [cpOKButton]="true"
+        style="padding: 0px; margin: 0px"
+        [cpPosition]="'bottom'"
+        [(colorPicker)]="colorArray[i]"
+        [cpPresetColors]="colorArray | discretized: 10"
+      ></div>
+    </div>
+  </div>
+</div>

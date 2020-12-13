@@ -1,0 +1,62 @@
+<div *ngIf="11 > colorPalette.length">
+  <app-display-palette
+    [isNamed]="true"
+    [isNotClickable]="true"
+    [name]="'Html Colors'"
+    style="width: 100%"
+    [colorArray]="getColorArrayData('Html Hex')"
+    [isVertical]="false"
+    [isGradient]="false"
+    [rowHeight]="'35px'"
+    (click)="displayColorArrayData('Html Hex')"
+  ></app-display-palette>
+</div>
+<div>
+  <mat-card class="card">
+    <mat-form-field class="full-width">
+      <mat-label>{{ currentDataTitle }}</mat-label>
+      <input
+        matInput
+        [value]="asString(getColorArrayData(currentDataTitle))"
+        [style.padding]="'5px'" /></mat-form-field
+  ></mat-card>
+  <div class="mini-button">
+    <button
+      mat-mini-fab
+      color="primary"
+      aria-label="shuffle palette"
+      (click)="refresh()"
+    >
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="colorPalette.length > 10">
+  <mat-form-field [style.width]="'200px'" [style.padding]="'5px'">
+    <mat-label>Fast Data Views</mat-label>
+    <mat-select [(value)]="currentDataTitle">
+      <mat-option *ngFor="let preset of fastDataTitles" [value]="preset">
+        {{ preset }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field [style.width]="'200px'" [style.padding]="'5px'">
+    <mat-label>Slow Data Views</mat-label>
+    <mat-select [(value)]="currentDataTitle">
+      <mat-option *ngFor="let preset of slowDataTitles" [value]="preset">
+        {{ preset }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div *ngIf="11 > colorPalette.length">
+  <app-array-to-textarea
+    *ngFor="let dataTitle of dataTitles"
+    [arrayTitle]="dataTitle"
+    [arr]="getColorArrayData(dataTitle)"
+    (click)="displayColorArrayData(dataTitle)"
+  >
+  </app-array-to-textarea>
+</div>

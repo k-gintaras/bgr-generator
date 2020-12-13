@@ -1,0 +1,436 @@
+<div style="z-index: 100; position: relative" class="container-fluid">
+  <div class="row">
+    <mat-card class="card full-width">
+      <mat-card-title>Base Element Settings</mat-card-title>
+
+      <mat-form-field [style.fontSize]="25" class="full-width">
+        <mat-label>baseElementId Will be Used</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="20"
+          [(ngModel)]="htmlInput"
+          (ngModelChange)="onElementInputChange()"
+          type="text"
+        ></textarea>
+      </mat-form-field>
+
+      <div style="padding: 20px" class="checkered">
+        <div
+          style="border: 0px; margin: 0px; padding: 0px"
+          id="containerForBaseElement"
+          [innerHTML]="htmlInput | inputToHtml"
+        ></div>
+      </div>
+    </mat-card>
+  </div>
+  <div
+    class="row"
+    [ngClass]="sticky[0] ? 'fixed-view' : 'row'"
+    [style.top]="getStickyHeight() + 30 + 'px'"
+  >
+    <mat-card class="card">
+      <div
+        *ngIf="!sticky[0]"
+        class="triangle-top"
+        (click)="sticky[0] = !sticky[0]"
+      ></div>
+      <mat-card-title>Other Settings</mat-card-title>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Export Quality</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.1"
+          [(ngModel)]="quality"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <div class="mini-button">
+        <button
+          mat-mini-fab
+          color="primary"
+          aria-label="shuffle palette"
+          (click)="save()"
+        >
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Density</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.1"
+          [(ngModel)]="density"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.padding]="'5px'">
+        <mat-label>Background Color</mat-label>
+        <input
+          matInput
+          [value]="backgroundColor | colorTranslate"
+          [cpOKButton]="true"
+          [style.padding]="'5px'"
+          [style.background]="backgroundColor"
+          [(colorPicker)]="backgroundColor"
+          [cpPresetColors]="colorPalette | discretized: 10"
+          [cpOutputFormat]="'hex'"
+      /></mat-form-field>
+      <div class="mini-button">
+        <button
+          mat-mini-fab
+          color="primary"
+          aria-label="shuffle palette"
+          (click)="randomPrimary()"
+        >
+          <mat-icon>shuffle</mat-icon>
+        </button>
+      </div>
+
+      <mat-form-field [style.width]="'200px'" [style.padding]="'5px'">
+        <mat-label>Preset Colors</mat-label>
+        <mat-select
+          [(value)]="selectedColorPresetPreset"
+          (selectionChange)="onColorPresetSelect()"
+        >
+          <mat-option
+            *ngFor="let preset of colorPresetsPresets"
+            [value]="preset"
+          >
+            {{ preset }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div
+        *ngIf="sticky[0]"
+        class="triangle-bottom"
+        (click)="sticky[0] = !sticky[0]"
+      ></div>
+    </mat-card>
+  </div>
+  <div
+    class="row"
+    [ngClass]="sticky[1] ? 'fixed-view' : 'row'"
+    [style.top]="getStickyHeight() + 30 + 'px'"
+  >
+    <mat-card class="card">
+      <div
+        *ngIf="!sticky[1]"
+        class="triangle-top"
+        (click)="sticky[1] = !sticky[1]"
+      ></div>
+      <mat-card-title>Generator Mode</mat-card-title>
+      <mat-radio-group class="radio-group" [(ngModel)]="selectedMode">
+        <mat-radio-button
+          [value]="mode"
+          class="radio"
+          *ngFor="let mode of modes"
+          [checked]="mode === selectedMode"
+        >
+          {{ mode }}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <div class="mini-button">
+        <button
+          mat-mini-fab
+          color="primary"
+          aria-label="shuffle palette"
+          (click)="whatToDisplay()"
+        >
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      </div>
+      <div
+        *ngIf="sticky[1]"
+        class="triangle-bottom"
+        (click)="sticky[1] = !sticky[1]"
+      ></div>
+    </mat-card>
+  </div>
+  <div
+    class="row"
+    [ngClass]="sticky[2] ? 'fixed-view' : 'row'"
+    [style.top]="getStickyHeight() + 30 + 'px'"
+  >
+    <mat-card class="card">
+      <div
+        *ngIf="!sticky[2]"
+        class="triangle-top"
+        (click)="sticky[2] = !sticky[2]"
+      ></div>
+      <mat-card-title>Matrix Settings</mat-card-title>
+      <mat-checkbox
+        [(ngModel)]="isRandomRotated"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Random Rotated</mat-checkbox
+      >
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Size Variation</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.1"
+          [(ngModel)]="sizeVariation"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Max Element W</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.1"
+          [(ngModel)]="maxElementWidth"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Max Element H</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.1"
+          [(ngModel)]="maxElementHeight"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Max Text S</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.1"
+          [(ngModel)]="maxTextSize"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <div
+        *ngIf="sticky[2]"
+        class="triangle-bottom"
+        (click)="sticky[2] = !sticky[2]"
+      ></div>
+    </mat-card>
+  </div>
+  <div
+    class="row"
+    [ngClass]="sticky[3] ? 'fixed-view' : 'row'"
+    [style.top]="getStickyHeight() + 30 + 'px'"
+  >
+    <mat-card class="card">
+      <div
+        *ngIf="!sticky[3]"
+        class="triangle-top"
+        (click)="sticky[3] = !sticky[3]"
+      ></div>
+      <mat-card-title>Coloring Settings</mat-card-title>
+      <mat-checkbox
+        [(ngModel)]="isElementVisible"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Element Visible</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isElementRandomColor"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Element Random Color</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isElementOriginalColor"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Element Original Color</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isTextVisible"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Text Visible</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isTextRandomColor"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Text Random Color</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isTextOriginalColor"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Text Original Color</mat-checkbox
+      >
+      <div
+        *ngIf="sticky[3]"
+        class="triangle-bottom"
+        (click)="sticky[3] = !sticky[3]"
+      ></div>
+    </mat-card>
+  </div>
+  <div
+    class="row"
+    [ngClass]="sticky[4] ? 'fixed-view' : 'row'"
+    [style.top]="getStickyHeight() + 30 + 'px'"
+  >
+    <mat-card class="card">
+      <div
+        *ngIf="!sticky[4]"
+        class="triangle-top"
+        (click)="sticky[4] = !sticky[4]"
+      ></div>
+      <mat-card-title>Rotatonator Settings</mat-card-title>
+      <mat-card-subtitle>Presets Work On 1000 Colors</mat-card-subtitle>
+      <mat-checkbox
+        [(ngModel)]="isElementOriginalSize"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Element Original Size</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isElementRotated"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Element Rotated</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isTextOriginalSize"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Text Original Size</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isTextRotated"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Text Rotated</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isDecreasing"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Decreasing</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isSpiral"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Spiral</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="isJustRotated"
+        (change)="onSettingsUpdate()"
+        class="checkbox"
+        >Just Rotating</mat-checkbox
+      >
+      <hr />
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Starting Angle</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.01"
+          [(ngModel)]="startingDegree"
+          (ngModelChange)="onStartingDegreeUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Starting Radius</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.01"
+          [(ngModel)]="startingRadius"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Starting Size</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.01"
+          [(ngModel)]="startingSize"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Angle Increment</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.01"
+          [(ngModel)]="degreeIncrement"
+          (ngModelChange)="onDegreeIncrementUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Radius Increment</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.01"
+          [(ngModel)]="radiusIncrease"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+      <mat-form-field [style.width]="'100px'" [style.padding]="'5px'">
+        <mat-label>Size Increment</mat-label>
+        <input
+          matInput
+          type="number"
+          step="0.01"
+          [(ngModel)]="sizeIncrease"
+          (ngModelChange)="onSettingsUpdate()"
+          [style.padding]="'5px'"
+      /></mat-form-field>
+
+      <mat-form-field [style.width]="'200px'" [style.padding]="'5px'">
+        <mat-label>Rotationator Presets</mat-label>
+        <mat-select
+          [(value)]="selectedPreset"
+          (selectionChange)="onPresetSelect()"
+        >
+          <mat-option
+            *ngFor="let preset of rotationatorPresets | keyvalue"
+            [value]="preset.key"
+          >
+            {{ preset.key }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field [style.width]="'200px'" [style.padding]="'5px'">
+        <mat-label>Radian Presets</mat-label>
+        <mat-select
+          [(value)]="selectedRadian"
+          (selectionChange)="onAngleSelect()"
+        >
+          <mat-option
+            *ngFor="let preset of anglePresets | keyvalue"
+            [value]="preset.key"
+          >
+            {{ preset.key }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div
+        *ngIf="sticky[4]"
+        class="triangle-bottom"
+        (click)="sticky[4] = !sticky[4]"
+      ></div>
+    </mat-card>
+  </div>
+</div>
+<div style="position: relative; z-index: 1">
+  <mat-card class="card">
+    <div
+      [style.background]="backgroundColor"
+      class="htmlImage"
+      id="htmlImage"
+    ></div>
+  </mat-card>
+</div>

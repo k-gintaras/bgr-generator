@@ -1,0 +1,12 @@
+<app-display-palette
+  *ngFor="let item of colorMixerMatrix"
+  [isNamed]="true"
+  [name]="'mix ' + item[0] + ' ' + item[2] + ' ' + item[1]"
+  style="width: 100%"
+  [colorArray]="getMixColors(item)"
+  (click)="mixColors(item)"
+  [isVertical]="false"
+  [isGradient]="false"
+  [colorCount]="colorArr.length"
+  [rowHeight]="'35px'"
+></app-display-palette>

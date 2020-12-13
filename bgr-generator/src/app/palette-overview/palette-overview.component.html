@@ -1,0 +1,109 @@
+<div class="center-div">
+  <mat-card
+    *ngIf="!isNotWhiteBackground"
+    style="display: inline-block"
+    [style.background]="'#ffffff'"
+    [style.width]="exampleHeight"
+    [style.height]="exampleHeight"
+  >
+    <app-logo-colors
+      [backgroundColor]="'#ffffff'"
+      [borderColor]="colorPalette[1]"
+      [squareColor]="colorPalette[2]"
+      [circleColor]="colorPalette[3]"
+    ></app-logo-colors>
+  </mat-card>
+
+  <mat-card
+    *ngIf="!isNotWhiteBackground"
+    style="display: inline-block"
+    [style.background]="'#ffffff'"
+    [style.width]="exampleHeight"
+    [style.height]="exampleHeight"
+  >
+    <app-sample-app-colors
+      [backgroundColor]="'#ffffff'"
+      [headerColor]="colorPalette[1]"
+      [buttonColor]="colorPalette[2]"
+      [borderColor]="colorPalette[3]"
+    >
+    </app-sample-app-colors>
+  </mat-card>
+  <mat-card
+    *ngIf="isNotWhiteBackground"
+    style="display: inline-block"
+    [style.width]="exampleHeight"
+    [style.height]="exampleHeight"
+    [style.background]="colorPalette[4]"
+  >
+    <app-logo-colors
+      [backgroundColor]="colorPalette[0]"
+      [borderColor]="colorPalette[1]"
+      [squareColor]="colorPalette[2]"
+      [circleColor]="colorPalette[3]"
+    ></app-logo-colors>
+  </mat-card>
+
+  <mat-card
+    *ngIf="isNotWhiteBackground"
+    style="display: inline-block"
+    [style.width]="exampleHeight"
+    [style.height]="exampleHeight"
+    [style.background]="colorPalette[4]"
+  >
+    <app-sample-app-colors
+      [backgroundColor]="colorPalette[0]"
+      [headerColor]="colorPalette[1]"
+      [buttonColor]="colorPalette[2]"
+      [borderColor]="colorPalette[3]"
+    >
+    </app-sample-app-colors>
+  </mat-card>
+
+  <mat-card
+    style="display: inline-block"
+    [style.width]="exampleHeight"
+    [style.height]="exampleHeight"
+  >
+    <div style="width: 100%">
+      <app-display-palette
+        [colorCount]="colorPalette.length"
+        [colorArray]="colorPalette"
+        [isGradient]="false"
+        [isVertical]="false"
+      ></app-display-palette>
+    </div>
+
+    <div style="margin-top: 5%; width: 20%; float: left">
+      <app-display-palette
+        [colorCount]="colorPalette.length"
+        [colorArray]="colorPalette"
+        [isGradient]="false"
+        [isVertical]="true"
+      ></app-display-palette>
+    </div>
+
+    <div style="margin-top: 5%; width: 20%; float: right">
+      <app-display-palette
+        [colorCount]="colorPalette.length"
+        [colorArray]="colorPalette"
+        [isGradient]="false"
+        [isVertical]="true"
+      ></app-display-palette>
+    </div>
+
+    <div
+      [ngStyle]="getGradient()"
+      style="position: absolute; left: 25%; top: 25%; width: 50%; height: 50%"
+    ></div>
+
+    <div style="position: relative; top: 80%; width: 100%">
+      <app-display-palette
+        [colorCount]="colorPalette.length"
+        [colorArray]="colorPalette"
+        [isGradient]="true"
+        [isVertical]="false"
+      ></app-display-palette>
+    </div>
+  </mat-card>
+</div>

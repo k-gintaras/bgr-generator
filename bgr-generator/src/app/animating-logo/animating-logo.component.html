@@ -1,0 +1,7 @@
+<div
+  *ngFor="let color of logoColors; index as i; trackBy: trackByIndex"
+  [style.color]="color"
+  style="display: inline-block; font-weight: bold; font-size: xx-large"
+>
+  {{ logoText.charAt(i) }}
+</div>

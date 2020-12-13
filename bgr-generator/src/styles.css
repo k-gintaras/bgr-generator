@@ -1,0 +1,315 @@
+/* You can add global styles to this file, and also import other style files */
+/* body{background-color:#777777;} */
+
+/* .mat-raised-button {
+ width: 250px;
+   background-color: rgb(4, 77, 77);
+
+} */
+
+.triangle-top {
+  position: absolute;
+    border-width: 20px;
+    border-style: solid;
+    border-color:grey grey transparent transparent;
+    top:0;
+    right:0;
+    width:0;
+    height:0;
+    cursor:pointer;
+}
+.triangle-top:hover {
+    border-color:rgb(189, 189, 189) rgb(189, 189, 189) transparent transparent;
+}
+.triangle-top:active {
+    border-color:grey grey transparent transparent;
+}
+
+.triangle-bottom {
+  position: absolute;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent grey grey transparent;
+    bottom:0;
+    right:0;
+    width:0;
+    height:0;
+    cursor:pointer;
+}
+.triangle-bottom:hover {
+    border-color: transparent rgb(189, 189, 189) rgb(189, 189, 189) transparent;
+}
+.triangle-bottom:active {
+    border-color: transparent grey grey transparent;
+}
+.card{
+  margin:5px;
+}
+.radio-group {
+  /* display: flex;
+  flex-direction: row; */
+  margin: 15px 0;
+}
+
+.radio {
+  margin: 5px;
+}
+
+.striped{
+  background-image: linear-gradient(45deg, #a3a3a3 25%, #b9b6bd 25%, #b9b6bd 50%, #a3a3a3 50%, #a3a3a3 75%, #b9b6bd 75%, #b9b6bd 100%);
+background-size: 14.14px 14.14px;
+}
+
+.checkered{
+  background-color:#909090;
+  background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.full-width{
+  width:100%;
+}
+
+.no-spaces{
+  padding:0px;
+  margin:0px;
+}
+
+.dark{
+  background-color:black;
+  color:white;
+}
+.dark a{
+  color:white;
+}
+.clickable{
+  cursor: pointer;
+}
+.clickable:hover{
+ font-weight: bold;
+}
+.clickable:active{
+ font-weight:normal;
+}
+.onhover-bolden:hover{
+  font-weight: bold;
+}
+.mini-button{
+  margin:5px;
+  display:inline-block;
+}
+.main-inputs-checkbox{
+  margin-left:5px;
+}
+.fixed-view{
+  position: fixed; z-index: 999;
+}
+.sticky-view{
+  position: sticky; z-index: 998;
+}
+.sticky-color-view{
+  position: sticky; top: 0; z-index: 998;
+}
+.non-sticky-color-view{
+  position: relative; z-index: 998;
+}
+
+.butt-palette-row-no-click{
+    /* position:relative;
+width:100%; */
+  border: 2px solid transparent;
+}
+
+.butt-palette-row{
+    /* position:relative;
+width:100%; */
+margin-bottom:5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background:transparent;
+}
+.butt-palette-row:hover{
+    border: 2px solid grey;
+margin-bottom:5px;
+
+  /* box-shadow: 0 0 20px 20px white; */
+  /* width:100%; */
+  z-index:1011101;
+}
+.butt-palette-row:active{
+  border: 2px solid black;
+  z-index:1001;
+}
+.radius{
+    border-radius: 13px;
+}
+
+.stretch-content{
+  display:flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.center-div{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-wrap: wrap;
+}
+
+.center-div-no-wrap{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.center-vertical-horizontal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.center-horizontal{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-wrap: wrap;
+}
+
+
+.tile-image {
+  width:100%;
+  height: auto;
+}
+
+.btn-colorator{
+   width: 250px;
+
+  background-color: rgb(4, 77, 77);
+}
+
+.top{
+  z-index:999;
+}
+.userElement{
+  padding:20px;
+display: inline-block;
+/* box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12); */
+
+  background-image: linear-gradient(45deg, rgb(255, 255, 255), rgb(209, 209, 209));
+  background-size: 10px 10px;
+}
+
+.checkbox{
+  margin:10px;
+}
+.container {
+  display: grid;
+}
+
+
+.content, .overlay {
+  grid-area: 1 / 1;
+  width:5000px;
+  height:5000px;
+  margin:0px;
+  padding:0px;
+  border:0px;
+  background-color: transparent;
+  z-index:2;
+}
+
+.htmlImage{
+  position:relative;
+  width:auto;
+  height:2000px;
+  margin:0px;
+  padding:0px;
+  border:0px;
+  background-color: transparent;
+}
+
+/* .hide-scrollbar {
+	overflow: -moz-hidden-unscrollable;
+	overflow: hidden;
+} */
+/* *{
+	overflow: -moz-hidden-unscrollable;
+	overflow: hidden;
+} */
+
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+/* drag and drop */
+.drag-container {
+  width: 155px;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* drag and drop */
+.drag-container2 {
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.drag-list {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.drag-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.drag-list.cdk-drop-list-dragging .drag-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

@@ -1,0 +1,22 @@
+<div [style.background]="backgroundColor" class="backgroundColor">
+  <div [style.background]="headerColor" class="headerColor">
+    <div
+      style="
+        width: 50px;
+        height: 50px;
+        left: 20px;
+        top: 5px;
+        position: absolute;
+      "
+    >
+      <app-logo-colors
+        [backgroundColor]="backgroundColor"
+        [borderColor]="headerColor"
+        [squareColor]="buttonColor"
+        [circleColor]="borderColor"
+      ></app-logo-colors>
+    </div>
+  </div>
+  <div [style.background]="borderColor" class="borderColor"></div>
+  <div [style.background]="buttonColor" class="buttonColor">&nbsp;</div>
+</div>

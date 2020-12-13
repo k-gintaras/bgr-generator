@@ -1,0 +1,32 @@
+.backgroundColor{
+  position:relative;
+  border-radius: 50%;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.borderColor{
+  position:absolute;
+  border-radius: 50%;
+  top:5%;
+  left:5%;
+  min-height: 90%;
+  min-width: 90%;
+}
+
+.circleColor{
+  position:absolute;
+  border-radius: 50%;
+  top:40%;
+  left:40%;
+  min-height: 60%;
+  min-width: 60%;
+}
+
+.squareColor{
+  position:absolute;
+  top:20%;
+  left:20%;
+  min-height: 20%;
+  min-width: 20%;
+}

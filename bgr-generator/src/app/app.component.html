@@ -1,0 +1,118 @@
+<nav class="navbar navbar-default dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <!-- //Colorator -->
+        <div
+          *ngFor="
+            let color of logoColors | discretized: 9;
+            index as i;
+            trackBy: trackByIndex
+          "
+          [style.color]="color"
+          style="display: inline-block; font-weight: bold; font-size: xx-large"
+        >
+          {{ 'Colorator'.charAt(i) }}
+          <!-- <span [style.color]="textColor">{{ textColor }}</span> -->
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="mini-button" [style.padding]="'0px'">
+        <input
+          matInput
+          [(ngModel)]="colorAmount"
+          (ngModelChange)="onAmountColorPick()"
+          [value]="colorAmount"
+          type="number"
+          min="1"
+          [style.padding]="'5px'"
+          [style.width]="'75px'"
+          [style.height]="'25px'"
+        />
+      </div>
+      <div class="mini-button">
+        <button
+          mat-mini-fab
+          color="primary"
+          aria-label="shuffle palette"
+          (click)="shuffle()"
+        >
+          <mat-icon>shuffle</mat-icon>
+        </button>
+      </div>
+      <div class="mini-button">
+        <button
+          mat-mini-fab
+          color="primary"
+          aria-label="shuffle palette"
+          (click)="sort()"
+        >
+          <mat-icon>sort</mat-icon>
+        </button>
+      </div>
+    </div>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/image-extractor">Imagerator</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/angle-extractor">HUErator</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/scale-extractor">Scalerator</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/combine-extractor">Combinator</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/preset-extractor">Presets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/overview">Comparator</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/color-data">Data</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/bgr-generator">Backgrounds</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../assets/LICENSE.txt">License</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div
+  style="background-color: white"
+  [ngClass]="isSticky ? 'sticky-color-view' : 'non-sticky-color-view'"
+  (window:resize)="onResize()"
+>
+  <app-display-palette
+    [isNotClickable]="true"
+    [isNamed]="true"
+    [name]="previousScheme"
+    style="width: 100%"
+    [colorArray]="previousArray"
+    [isVertical]="false"
+    [isGradient]="false"
+    [colorCount]="colorAmount"
+    [rowHeight]="30 + 'px'"
+    (click)="activatePreviousPalette()"
+  ></app-display-palette>
+  <app-display-palette
+    [isNotClickable]="true"
+    [isNamed]="true"
+    [name]="colorScheme"
+    style="width: 100%"
+    [colorArray]="colorArray"
+    [isVertical]="false"
+    [isGradient]="false"
+    [colorCount]="colorAmount"
+    [rowHeight]="paletteHeight + 'px'"
+  ></app-display-palette>
+</div>
+
+<router-outlet> </router-outlet>
+<div style="height: 1000px"></div>
+<!-- <app-licenses></app-licenses> -->

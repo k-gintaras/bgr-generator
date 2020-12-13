@@ -1,0 +1,11 @@
+<input
+  *ngFor="let item of colorPalette; index as i; trackBy: trackByIndex"
+  matInput
+  [value]="item | colorTranslate"
+  [cpOKButton]="true"
+  [style.background]="item"
+  [style.padding]="'5px'"
+  [cpPosition]="'bottom'"
+  [(colorPicker)]="colorPalette[i]"
+  [cpPresetColors]="colorPalette | discretized: 10"
+/>

@@ -1,0 +1,12 @@
+<app-display-palette
+  *ngFor="let item of generators"
+  [isNamed]="true"
+  [name]="item + ' Scheme'"
+  style="width: 100%"
+  (click)="generateColors(item)"
+  [colorArray]="getGenerateColors(item)"
+  [isVertical]="false"
+  [isGradient]="false"
+  [colorCount]="colorAmount"
+  [rowHeight]="'35px'"
+></app-display-palette>

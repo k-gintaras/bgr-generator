@@ -1,0 +1,139 @@
+<canvas
+  id="canvasImage"
+  width="1000"
+  height="600"
+  style="display: none"
+></canvas>
+<canvas
+  id="canvasImage3"
+  width="1000"
+  height="600"
+  style="display: none"
+></canvas>
+
+<img id="mainImage" src="{{ imgUrl }}" style="display: none" />
+<mat-grid-list
+  rows="5"
+  [cols]="colBreakpoint"
+  (window:resize)="onResize()"
+  rowHeight="3:1"
+>
+  <mat-grid-tile [colspan]="colSpan1" [rowspan]="rowSpan">
+    <mat-card style="background-color: transparent">
+      <input type="file" (change)="onFileSelected($event)" />
+      <hr />
+      <mat-card-title>Auto Adjust Image</mat-card-title>
+      <mat-card-subtitle>Could produce worse palettes.</mat-card-subtitle>
+      <button mat-raised-button (click)="fireflyFix()">Firefly</button>
+      <button mat-raised-button (click)="retinexFix()">Retinex (SLRMSR)</button>
+      <button mat-raised-button (click)="retinexFixSlower()">
+        Retinex (LRSR)
+      </button>
+      <button mat-raised-button (click)="camanFix()">Caman (Clarity)</button>
+      <button mat-raised-button color="accent" (click)="resetCanvas()">
+        Reset
+      </button>
+      <hr />
+      <mat-card-subtitle>
+        Special Thanks to: Authors of Firefly and Retinex papers: Nikola Banic
+        and Sven Loncaric.<br />
+        <a
+          href="https://ipg.fer.hr/_download/repository/Firefly_-_A_Hardware-friendly_Real-Time_Local_Brightness_Adjustment.pdf"
+          >Firefly</a
+        ><br />
+        <a href="https://ipg.fer.hr/_download/repository/josaa-32-11-2136.pdf"
+          >Retinex</a
+        >
+        <!-- <a
+          href="https://ipg.fer.hr/_download/repository/Light_Random_Sprays_Retinex_-_Exploiting_the_Noisy_Illumination_Estimation.pdf"
+          >Retinex</a
+        > -->
+      </mat-card-subtitle>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="colSpan2" [rowspan]="rowSpan">
+    <canvas id="canvasImage2" class="tile-image" layout-fit></canvas>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<div style="margin: 20px">
+  <mat-card>
+    <mat-card-title>Extract Palette</mat-card-title>
+    <button mat-raised-button (click)="averageHueSaturationPalette()">
+      Colorator* (HS)
+    </button>
+    <button mat-raised-button (click)="averageSuperLabSaturationPalette()">
+      SuperLab* (SLS)
+    </button>
+    <button mat-raised-button (click)="colorThiefPalette()">ColorThief</button>
+    <button mat-raised-button (click)="vibrantPalette()">Vibrant</button>
+    <button mat-raised-button (click)="rgbQuantPalette()">RgbQuant</button>
+  </mat-card>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> More* </mat-panel-title>
+      <mat-panel-description> Settings and Palettes </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <mat-label>Precision*</mat-label>
+      <input matInput [(ngModel)]="averagingPrecision" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Color Mode</mat-label>
+      <mat-select [(value)]="colorMode">
+        <mat-option
+          *ngFor="let item of colorModes; index as i; trackBy: trackByTitle"
+          value="{{ item }}"
+          >{{ item }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-card>
+      <mat-card-title>Extract Palette</mat-card-title>
+      <button mat-raised-button (click)="averageHueHuePalette()">
+        Average (HH)*
+      </button>
+      <button mat-raised-button (click)="averageSaturationLightnessPalette()">
+        Pastel (SL)*
+      </button>
+      <button mat-raised-button (click)="averageLightnessSaturationPalette()">
+        Warm (LS)*
+      </button>
+      <button mat-raised-button (click)="averageHueLightnessPalette()">
+        Light (HL)*
+      </button>
+      <button mat-raised-button (click)="averageLightnessLightnessPalette()">
+        Cold (LL)*
+      </button>
+      <hr />
+      <button mat-raised-button (click)="averageLightnessHuePalette()">
+        (LH)*
+      </button>
+      <button mat-raised-button (click)="averageSaturationHuePalette()">
+        (SH)*
+      </button>
+      <button mat-raised-button (click)="averageSaturationSaturationPalette()">
+        (SS)*
+      </button>
+      <button mat-raised-button (click)="averageSuperLabHuePalette()">
+        SuperLab (SLH)*
+      </button>
+      <button mat-raised-button (click)="averageSuperLabLightnessPalette()">
+        SuperLab (SLL)*
+      </button>
+      <button mat-raised-button (click)="averageSuperLabLabPalette()">
+        SuperLab (SLSL)*
+      </button>
+
+      <hr />
+      <mat-card-subtitle
+        >How: Sort by (x_), discretize by color count, sort each by (_x)
+        discretize each by 3, pick 1, average by mode.
+      </mat-card-subtitle>
+      <p>
+        Sorting by: H = Hue, S = Saturation, L = Lightness, SL = LAB2000
+        Distance from White.
+      </p>
+    </mat-card>
+  </mat-expansion-panel>
+</div>

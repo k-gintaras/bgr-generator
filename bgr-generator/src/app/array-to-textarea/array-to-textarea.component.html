@@ -1,0 +1,31 @@
+<div *ngIf="isClickable" class="butt-palette-row">
+  <mat-grid-list
+    gutterSize="0"
+    rows="1"
+    [cols]="arr.length + 1"
+    [rowHeight]="50"
+  >
+    <mat-grid-tile
+      ><span style="font-size: x-small">{{ arrayTitle }}</span></mat-grid-tile
+    >
+    <mat-grid-tile *ngFor="let item of arr" [colspan]="1" [rowspan]="1">
+      <span>{{ item }}</span>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<div *ngIf="!isClickable">
+  <mat-grid-list
+    gutterSize="0"
+    rows="1"
+    [cols]="arr.length + 1"
+    [rowHeight]="25"
+  >
+    <mat-grid-tile
+      ><span style="font-size: x-small">{{ arrayTitle }}</span></mat-grid-tile
+    >
+    <mat-grid-tile *ngFor="let item of arr" [colspan]="1" [rowspan]="1">
+      <span>{{ item }}</span>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

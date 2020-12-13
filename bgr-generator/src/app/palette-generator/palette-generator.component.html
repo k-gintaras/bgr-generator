@@ -1,0 +1,41 @@
+<div class="center-div">
+  <mat-card class="card">
+    <mat-form-field [style.padding]="'5px'">
+      <mat-label>Primary Color</mat-label>
+      <input
+        matInput
+        [value]="primaryColor | colorTranslate"
+        [cpOKButton]="true"
+        [style.padding]="'5px'"
+        [style.background]="primaryColor"
+        [(colorPicker)]="primaryColor"
+        [cpPresetColors]="colorArray | discretized: 10"
+        (colorPickerChange)="onPrimaryColorPick($event)"
+        [cpOutputFormat]="'hex'"
+    /></mat-form-field>
+    <div class="mini-button">
+      <button
+        mat-mini-fab
+        color="primary"
+        aria-label="shuffle palette"
+        (click)="random()"
+      >
+        <mat-icon>shuffle</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>
+
+<app-display-palette
+  *ngFor="let item of generators"
+  [isNamed]="true"
+  [name]="item"
+  style="width: 100%"
+  (click)="generateAngleColors(item)"
+  [colorArray]="getGenerateAngleColors(item)"
+  matTooltip="{{ item }}"
+  [isVertical]="false"
+  [isGradient]="false"
+  [colorCount]="colorAmount"
+  [rowHeight]="'35px'"
+></app-display-palette>
