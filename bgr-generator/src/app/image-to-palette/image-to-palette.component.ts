@@ -180,7 +180,7 @@ export class ImageToPaletteComponent implements OnInit {
   //
   //
   fireflyFix() {
-    new Promise((resolve, reject) => {
+    new Promise<void>((resolve, reject) => {
       this.firefly.performFirefly(this.canvas, this.canvas2, true); // creates lots of bright colors
       resolve();
       // reject(string);
@@ -190,7 +190,7 @@ export class ImageToPaletteComponent implements OnInit {
   }
 
   retinexFix() {
-    new Promise((resolve, reject) => {
+    new Promise<void>((resolve, reject) => {
       this.retinex.applySLRMSR(
         true,
         true,
@@ -211,7 +211,7 @@ export class ImageToPaletteComponent implements OnInit {
   }
 
   retinexFixSlower() {
-    new Promise((resolve, reject) => {
+    new Promise<void>((resolve, reject) => {
       //   this.retinex.applySLRMSR(
       //     true,
       //     true,
