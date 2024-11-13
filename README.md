@@ -2,6 +2,8 @@
 
 **Colorator** is an Angular application for extracting and organizing colors from images in unique and customizable ways. This tool enables users to create color palettes by analyzing images using a variety of algorithms, including custom methods that prioritize hues and saturation levels to pick diverse and aesthetically pleasing colors. Colorator is ideal for designers, developers, and artists looking to create or explore color palettes for logos, websites, or art projects.
 
+![Link](https://background-generator-abd1d.web.app/image-extractor)
+
 ![Colorator Banner](readme-resources/colorator-image-to-palette.gif)
 
 ---
